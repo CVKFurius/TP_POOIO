@@ -1,61 +1,71 @@
 #include "mapa.h"
 #include <iostream>
 using namespace std;
-Mapa::Mapa(int _fila,int _columna)
+
+int **Mapa::getTablero() const
 {
-    fila=_fila;
-    columna=_columna;
+    return Tablero;
 }
 
-int Mapa::getFila()
+void Mapa::setTablero(int **newTablero)
 {
-    return fila;
+    Tablero = newTablero;
 }
 
-void Mapa::setFila(int x)
+Estacion *Mapa::getEstaciones() const
 {
-    this->fila=x;
+    return estaciones;
 }
 
-int Mapa::getColumna()
+void Mapa::setEstaciones(Estacion *newEstaciones)
+{
+    estaciones = newEstaciones;
+}
+
+int Mapa::getFila() const
+{
+    return this->fila;
+}
+
+void Mapa::setFila(int newFila)
+{
+    fila = newFila;
+}
+
+int Mapa::getColumna() const
 {
     return columna;
 }
 
-void Mapa::setColumna(int y)
+void Mapa::setColumna(int newColumna)
 {
-    this->columna=y;
+    columna = newColumna;
 }
 
-int **Mapa::generarMapa()
+void Mapa::genTablero()
 {
-    int** matriz = new int*[this->columna];
-    for (int i = 0; i < this->fila; i++) {
-        matriz[i] = new int[this->columna];
-    }
-    return matriz;
-}
-
-void Mapa::Mostrar(int** _matriz)
-{
-    cout << "Matriz " << this->fila << " x " << this->columna << ":" << endl;
-    for (int i = 0; i < this->fila; i++) {
-        for (int j = 0; j < this->columna; j++) {
-            cout << _matriz[i][j] << " ";
+int** matriz = new int*[columna];
+        for (int i = 0; i < fila; i++) {
+            matriz[i] = new int[columna];
         }
-        cout << endl;
-    }
+        for (int i = 0; i < columna; i++) {
+            for (int j = 0; j < columna; j++) {
+                matriz[i][j] = 0;
+
+            }
+        }
+        setTablero(matriz);
+
 }
 
-void Mapa::llenarMapa(int** _matriz)
+void Mapa::ConstruirVecEstaciones(int cont)
 {
+        Estacion* estaciones=new [cont];
+        setEstaciones(estaciones);
+}
 
-
-    for (int i = 0; i < this->columna; i++) {
-        for (int j = 0; j < this->columna; j++) {
-            _matriz[i][j] = 0;
-
-        }
-    }
-
+Mapa::Mapa(int _fila,int _columna)
+{
+    fila=_fila;
+    columna=_columna;
 }
